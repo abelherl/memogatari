@@ -11,6 +11,19 @@ class _SplashState extends State<Splash> {
 
   Map data = {};
 
+  void goToHome() {
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.pushReplacementNamed(context, '/home');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('init state ran');
+    goToHome();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +50,7 @@ class _SplashState extends State<Splash> {
                 ),
               ),
               Text(
-                'Keep the story going.',
+                'Keep the story, going.',
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w500,
