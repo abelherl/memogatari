@@ -71,6 +71,12 @@ flutter:
           weight: 900
         - asset: fonts/Poppins-ExtraLight.ttf
           weight: 200
+    - family: Playfair
+      fonts:
+        - asset: fonts/PlayfairDisplay-Black.ttf
+          weight: 900
+        - asset: fonts/PlayfairDisplay-Regular.ttf
+          weight: 400
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

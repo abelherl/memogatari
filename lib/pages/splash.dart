@@ -15,30 +15,38 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: memoPink,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'MEMOGATARI',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w200,
-                  color: memoWhite,
-                  fontSize: 25,
-                  letterSpacing: 8
-              ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                end: Alignment.topRight,
+                begin: Alignment.bottomLeft,
+                colors: [memoRed, memoOrange]
+              )
             ),
-            Text(
-              'Keep the story going.',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-                color: memoHint,
-                fontSize: 15,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Memogatari',
+                style: TextStyle(
+                  fontFamily: 'Playfair',
+                    fontWeight: FontWeight.w900,
+                    color: memoWhite,
+                    fontSize: 30,
+                ),
               ),
-            )
-          ],
+              Text(
+                'Keep the story going.',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  color: memoHint,
+                  fontSize: 14,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
