@@ -42,12 +42,7 @@ class _SplashState extends State<Splash> {
             children: <Widget>[
               Text(
                 'Memogatari',
-                style: TextStyle(
-                  fontFamily: 'Playfair',
-                    fontWeight: FontWeight.w900,
-                    color: memoWhite,
-                    fontSize: 30,
-                ),
+                style: Theme.of(context).textTheme.headline3
               ),
               Text(
                 'Keep the story, going.',
