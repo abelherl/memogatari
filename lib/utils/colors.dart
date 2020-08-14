@@ -11,7 +11,8 @@ const Color memoTeal = const Color(0xFFB2DFDB);
 const Color memoCyan = const Color(0xFFB2EBF2);
 const Color memoBlue = const Color(0xFFC7CEEA);
 const Color memoPurple = const Color(0xFFA3B5FD);
+const Color memoBone = const Color(0xFFF5F5F5);
 
-const Color memoBgColor = const Color(0xFFF5F5F5);
+const Color memoBgColor = memoBone;
 const Color memoTitleColor = Colors.black87;
 const Color memoBodyColor = Colors.black54;

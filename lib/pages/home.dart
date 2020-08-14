@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:clay_containers/clay_containers.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
+import 'package:memogatari/services/story.dart';
 import 'package:memogatari/utils/colors.dart';
 
 class Home extends StatefulWidget {
@@ -9,69 +12,94 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var listStory = [
+    Story(id: '1', title: 'One', description: 'Blabla', image: 'assets/book.jpg'),
+    Story(id: '2', title: 'Two', description: 'Blabla', image: 'assets/book.jpg'),
+    Story(id: '3', title: 'Three', description: 'Blabla', image: 'assets/book.jpg'),
+  ];
+  PageController pageController;
+  double fraction = 0.8;
+  double pageOffset;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: 0, viewportFraction: fraction)
+      ..addListener(() {
+        setState(() {
+          pageOffset = pageController.page;
+        });
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          physics: ClampingScrollPhysics(),
-          child: Container(
-            child: Stack(
-              overflow: Overflow.visible,
-              children: <Widget>[
-                Parent(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Your\nStories',
-                          style: Theme.of(context).textTheme.headline3,
-                          textAlign: TextAlign.left,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          child:
+//            Stack(
+//              overflow: Overflow.visible,
+//              children: <Widget>[
+//                Parent(
+//                  child: Padding(
+//                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+//                    child: Row(
+//                      mainAxisAlignment: MainAxisAlignment.start,
+//                      crossAxisAlignment: CrossAxisAlignment.start,
+//                      children: <Widget>[
+//                        Text(
+//                          'Your\nStories',
+//                          style: Theme.of(context).textTheme.headline3,
+//                          textAlign: TextAlign.left,
+//                        ),
+//                      ],
+//                    ),
+//                  ),
+//                  style: ParentStyle()
+//                    ..height(size.height * 0.05)
+//                    ..minHeight(180)
+//                    ..background.color(memoBgColor)
+//                    ..borderRadius(bottomLeft: 15, bottomRight: 15),
+//                ),
+                PageView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, position) {
+                    double scale = max(fraction, 1 - (pageOffset - position).abs() + fraction);
+                    return Parent(
+                      style: ParentStyle()
+                        ..margin(
+                          left: 15,
+                          top: 100 - scale * 25,
+                          right: 15,
+                          bottom: 100
+                        )
+                        ..elevation(50)
+                        ..borderRadius(all: 15)
+                        ..background.color(Colors.white),
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              listStory[position].title,
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                            Text(
+                                listStory[position].description,
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  style: ParentStyle()
-                    ..height(size.height * 0.05)
-                    ..minHeight(180)
-                    ..background.color(memoRed)
-                    ..borderRadius(bottomLeft: 15, bottomRight: 15),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child: GridView.count(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 50),
-                    physics: ScrollPhysics(),
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    children: <Widget>[
-                      StoryCard(),
-                      Parent(
-                        child: Container(
-                          child: Text(
-                            'Astray Medico',
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                        style: ParentStyle()
-                          ..background.color(Colors.white)
-                          ..borderRadius(all: 15)
-                          ..ripple(true)
-                          ..elevation(40)
-                          ..padding(all: 15)
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                    );
+                  },
+                  controller: pageController,
+                  itemCount: listStory.length,
+//                )
+//              ],
           ),
         ),
       ),
