@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:memogatari/utils/colors.dart';
 
 ThemeData mainTheme() {
-  final titleFont = 'Playfair';
-  final bodyFont = 'Poppins';
+  final titleFont = 'Poppins';
+  final bodyFont = 'Playfair';
   final accentColor = memoOrange;
   final primaryColor = memoRed;
+
+  final Shader linearGradient = LinearGradient(
+    colors: <Color>[memoRed, memoOrange],
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 500.0, 70.0));
 
   TextTheme _basicTextTheme(TextTheme base) {
     return base.copyWith(
@@ -19,16 +23,16 @@ ThemeData mainTheme() {
       headline4: base.headline4.copyWith(
         fontFamily: titleFont,
         fontWeight: FontWeight.w900,
-        fontSize: 18,
-        color: Colors.black87,
+        fontSize: 25,
+        foreground: Paint()..shader = linearGradient,
         height: 1.1
       ),
       headline6: base.headline6.copyWith(
           fontFamily: titleFont,
           fontWeight: FontWeight.w900,
           fontSize: 18,
-          color: Colors.black38,
-          height: 1
+          color: Colors.white,
+          height: 1.1
       ),
       overline: base.overline.copyWith(
           fontFamily: titleFont,
@@ -41,7 +45,8 @@ ThemeData mainTheme() {
         fontFamily: bodyFont,
         fontWeight: FontWeight.w500,
         fontSize: 15,
-        color: Colors.black38
+        color: Colors.white54,
+        height: 1.1
       )
     );
   }
