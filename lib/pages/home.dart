@@ -38,12 +38,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: <Widget>[
-            SizedBox(height: 15),
-            Text(
-              'Memogatari',
-              style: Theme.of(context).textTheme.headline4,
+            Positioned(
+              top: 20,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: Text(
+                    'Memogatari',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ),
+              ),
             ),
             Expanded(
               flex: 1,
@@ -70,7 +77,7 @@ class _HomeState extends State<Home> {
                 itemCount: listStory.length,
 //                )
 //              ],
-          ),
+              ),
             ),
         ]),
       ),
@@ -119,9 +126,9 @@ class _BookCardState extends State<BookCard> {
           style: ParentStyle()
             ..margin(
               left: 15,
-              top: 90 - widget.scale * 25,
+              top: 110 - widget.scale * 25,
               right: 15,
-              bottom: 90 - widget.scale * 25
+              bottom: 110 - widget.scale * 25
             )
             ..maxWidth(isPortrait ? double.infinity : size.height/2)
             ..maxHeight(isPortrait ? double.infinity : size.height)

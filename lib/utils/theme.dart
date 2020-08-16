@@ -23,15 +23,16 @@ ThemeData mainTheme() {
       headline4: base.headline4.copyWith(
         fontFamily: titleFont,
         fontWeight: FontWeight.w900,
-        fontSize: 25,
+        fontSize: 15,
         foreground: Paint()..shader = linearGradient,
+        background: Paint()..color = Colors.transparent,
         height: 1.1
       ),
       headline6: base.headline6.copyWith(
           fontFamily: titleFont,
           fontWeight: FontWeight.w900,
           fontSize: 18,
-          color: Colors.white,
+          color: Colors.black,
           height: 1.1
       ),
       overline: base.overline.copyWith(
