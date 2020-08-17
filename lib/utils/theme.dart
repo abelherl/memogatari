@@ -3,9 +3,11 @@ import 'package:memogatari/utils/colors.dart';
 
 ThemeData mainTheme() {
   final titleFont = 'Poppins';
-  final bodyFont = 'Playfair';
+  final bodyFont = 'Poppins';
   final accentColor = memoOrange;
   final primaryColor = memoRed;
+
+
 
   final Shader linearGradient = LinearGradient(
     colors: <Color>[memoRed, memoOrange],
@@ -23,7 +25,7 @@ ThemeData mainTheme() {
       headline4: base.headline4.copyWith(
         fontFamily: titleFont,
         fontWeight: FontWeight.w900,
-        fontSize: 15,
+        fontSize: 16,
         foreground: Paint()..shader = linearGradient,
         background: Paint()..color = Colors.transparent,
         height: 1.1
@@ -46,7 +48,7 @@ ThemeData mainTheme() {
         fontFamily: bodyFont,
         fontWeight: FontWeight.w500,
         fontSize: 15,
-        color: Colors.white54,
+        color: Colors.white,
         height: 1.1
       )
     );
