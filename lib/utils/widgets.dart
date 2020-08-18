@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:division/division.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,6 @@ class _BookCardState extends State<BookCard> {
   Widget build(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var size = MediaQuery.of(context).size;
-    var counter = 0;
     print(widget.offset);
 
     return Transform(
@@ -58,9 +58,9 @@ class _BookCardState extends State<BookCard> {
           style: ParentStyle()
             ..margin(
                 left: 15,
-                top: 200 - widget.scale * 60,
+                top: 150 - widget.scale * 40,
                 right: 15,
-                bottom: 210 - widget.scale * 60
+                bottom: 160 - widget.scale * 40
             )
             ..ripple(true, splashColor: memoRed)
             ..elevation(pressed ? 0 : 30)
@@ -78,7 +78,10 @@ class _BookCardState extends State<BookCard> {
                 });
               })
             },
-            onTapUp: (_){
+            onTapCancel: () {
+              timer.cancel();
+            },
+            onTapUp: (_) {
               timer.cancel();
             },
             child: ClipRRect(
@@ -93,8 +96,8 @@ class _BookCardState extends State<BookCard> {
                         ..linearGradient(
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
-                            colors: [memoRed.withAlpha(180), pressed ? memoOrange.withAlpha(150) : Colors.transparent])
-                        ..background.blur(pressed ? 3 : 0),
+                            colors: [memoRed.withAlpha(180), pressed ? memoOrange.withAlpha(150) : Colors.transparent]),
+//                        ..background.blur(pressed ? 3 : 0),
 //                    ..background.blur(widget.offset < -0.5 || widget.offset > 0.5 ? (widget.offset + 1) * 10 : widget.offset * 10)
                       child: Container(),
                     ),
@@ -111,10 +114,11 @@ class _BookCardState extends State<BookCard> {
                             children: <Widget>[
                               Hero(
                                 tag: 'title${widget.position}',
-                                child: Text(
+                                child: AutoSizeText(
                                     widget.story.title,
                                     style: widget.titleStyle,
-                                    maxLines: 4,
+                                    maxLines: 3,
+                                    minFontSize: 20,
                                     overflow: TextOverflow.fade,
                                 ),
                               ),

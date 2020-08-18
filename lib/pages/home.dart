@@ -57,40 +57,45 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: PageView.builder(
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, position) {
-                  double scale = max(fraction, 1 - (pageOffset - position).abs() + fraction);
-                  var angle = (pageOffset - position).abs();
+            Flex(
+              direction: Axis.vertical,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: PageView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, position) {
+                        double scale = max(fraction, 1 - (pageOffset - position).abs() + fraction);
+                        var angle = (pageOffset - position).abs();
 
-                  if (angle > 0.5) {
-                    angle = 1 - angle;
-                }
+                        if (angle > 0.5) {
+                          angle = 1 - angle;
+                      }
 
-                return BookCard(
-                    angle: angle,
-                    scale: scale,
-                    story: listStory[position],
-                    titleStyle: Theme.of(context).textTheme.headline3,
-                    subtitleStyle: Theme.of(context).textTheme.subtitle1,
-                    offset: pageOffset-position,
-                    position: position,
-                  );
-                },
-                controller: pageController,
-                itemCount: listStory.length,
-              ),
+                      return BookCard(
+                          angle: angle,
+                          scale: scale,
+                          story: listStory[position],
+                          titleStyle: Theme.of(context).textTheme.headline3,
+                          subtitleStyle: Theme.of(context).textTheme.subtitle1,
+                          offset: pageOffset-position,
+                          position: position,
+                        );
+                      },
+                      controller: pageController,
+                      itemCount: listStory.length,
+                  ),
+                ),
+              ],
             ),
             Positioned(
-              bottom: 25,
+              bottom: 30,
               child: SmoothPageIndicator(
                 controller: pageController,
                 count:  listStory.length,
                 effect:  ExpandingDotsEffect(
-                  dotWidth: 13,
-                  dotHeight: 13,
+                  dotWidth: 10,
+                  dotHeight: 10,
                   radius: 6.5,
                   dotColor: memoRed,
                   activeDotColor: memoRed,

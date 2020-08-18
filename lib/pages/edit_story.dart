@@ -21,7 +21,7 @@ class _EditStoryState extends State<EditStory> {
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0,),
-      backgroundColor: memoBrown,
+      backgroundColor: memoRed,
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -41,7 +41,7 @@ class _EditStoryState extends State<EditStory> {
                 child: Container(),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             Text(
               'TITLE',
               style: textTheme.overline,
