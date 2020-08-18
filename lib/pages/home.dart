@@ -89,11 +89,11 @@ class _HomeState extends State<Home> {
                 controller: pageController,
                 count:  listStory.length,
                 effect:  ExpandingDotsEffect(
-                  dotWidth: 15,
-                  dotHeight: 15,
-                  radius: 7.5,
+                  dotWidth: 13,
+                  dotHeight: 13,
+                  radius: 6.5,
                   dotColor: memoRed,
-                  activeDotColor: memoRed
+                  activeDotColor: memoRed,
                 ),
               ),
             )

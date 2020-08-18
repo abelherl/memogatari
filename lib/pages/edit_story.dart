@@ -13,27 +13,64 @@ class EditStory extends StatefulWidget {
 }
 
 class _EditStoryState extends State<EditStory> {
+  Map data = {};
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context).settings.arguments;
+    Story story = data['story'];
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(backgroundColor: memoBrown, elevation: 0,),
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0,),
       backgroundColor: memoBrown,
-      body: Column(
-        children: <Widget>[
-          Hero(
-            tag: 'title1',
-            child: Text(
-                'Astray Medico',
-                style: textTheme.headline3,
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Hero(
+              tag: 'image${data['position']}',
+              child: Parent(
+                style: ParentStyle()
+                  ..alignment.center()
+                  ..height(230)
+                  ..width(170)
+                  ..elevation(30)
+                  ..borderRadius(all: 5)
+                  ..background.image(url: story.image, fit: BoxFit.cover),
+                child: Container(),
+              ),
             ),
-          ),
-          SizedBox(height: 10),
-          Text('Poor Norina aww',
-            style: textTheme.subtitle1,
-            overflow: TextOverflow.fade,
-          ),
-        ],
+            SizedBox(height: 10),
+            Text(
+              'TITLE',
+              style: textTheme.overline,
+            ),
+            SizedBox(height: 5),
+            Hero(
+              tag: 'title${data['position']}',
+              child: Text(
+                story.title,
+                style: textTheme.headline3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'DESCRIPTION',
+              style: textTheme.overline,
+            ),
+            SizedBox(height: 5),
+            Hero(
+              tag: 'info${data['position']}',
+              child: Text(
+                story.description,
+                style: textTheme.subtitle1,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

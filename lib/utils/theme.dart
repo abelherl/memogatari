@@ -39,10 +39,10 @@ ThemeData mainTheme() {
       ),
       overline: base.overline.copyWith(
           fontFamily: titleFont,
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w500,
           fontSize: 10,
           letterSpacing: 5,
-          color: Colors.black38
+          color: Colors.white70
       ),
       subtitle1: base.subtitle1.copyWith(
         fontFamily: bodyFont,
