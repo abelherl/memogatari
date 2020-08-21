@@ -30,6 +30,14 @@ ThemeData mainTheme() {
         background: Paint()..color = Colors.transparent,
         height: 1.1
       ),
+      headline5: base.headline5.copyWith(
+          fontFamily: titleFont,
+          fontWeight: FontWeight.w900,
+          fontSize: 28,
+          foreground: Paint()..shader = linearGradient,
+          background: Paint()..color = Colors.transparent,
+          height: 1.1
+      ),
       headline6: base.headline6.copyWith(
           fontFamily: titleFont,
           fontWeight: FontWeight.w900,
@@ -42,14 +50,21 @@ ThemeData mainTheme() {
           fontWeight: FontWeight.w500,
           fontSize: 10,
           letterSpacing: 5,
-          color: Colors.white70
+          color: Colors.black54
       ),
       subtitle1: base.subtitle1.copyWith(
         fontFamily: bodyFont,
         fontWeight: FontWeight.w500,
-        fontSize: 15,
+        fontSize: 14,
         color: Colors.white,
         height: 1.1
+      ),
+      subtitle2: base.subtitle2.copyWith(
+          fontFamily: bodyFont,
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+          color: memoBodyColor,
+          height: 1.1
       )
     );
   }

@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:memogatari/services/story.dart';
 import 'package:memogatari/utils/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -20,8 +21,13 @@ class _EditStoryState extends State<EditStory> {
     Story story = data['story'];
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0,),
-      backgroundColor: memoRed,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: memoRed
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -31,12 +37,20 @@ class _EditStoryState extends State<EditStory> {
             Hero(
               tag: 'image${data['position']}',
               child: Parent(
+                gesture: Gestures()
+                  ..onTap(() {
+                    Navigator.pushNamed(context, '/image_viewer', arguments: {
+                      'image': story.image,
+                      'position': data['position']
+                    });
+                  }),
                 style: ParentStyle()
                   ..alignment.center()
                   ..height(230)
                   ..width(170)
                   ..elevation(30)
                   ..borderRadius(all: 5)
+                  ..ripple(true, splashColor: memoRed)
                   ..background.image(url: story.image, fit: BoxFit.cover),
                 child: Container(),
               ),
@@ -49,10 +63,13 @@ class _EditStoryState extends State<EditStory> {
             SizedBox(height: 5),
             Hero(
               tag: 'title${data['position']}',
-              child: Text(
-                story.title,
-                style: textTheme.headline3,
+              child: TextFormField(
+                initialValue: story.title,
+                style: textTheme.headline5,
                 textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  border: InputBorder.none
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -65,7 +82,7 @@ class _EditStoryState extends State<EditStory> {
               tag: 'info${data['position']}',
               child: Text(
                 story.description,
-                style: textTheme.subtitle1,
+                style: textTheme.subtitle2,
                 textAlign: TextAlign.center,
               ),
             ),

@@ -35,9 +35,10 @@ class BookCard extends StatefulWidget {
 
 class _BookCardState extends State<BookCard> {
   bool pressed = false;
-  double borderRadius = 13;
+  double borderRadius = 20;
 
   Timer timer;
+  bool isTapped = true;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +72,11 @@ class _BookCardState extends State<BookCard> {
             ..animate(450, Curves.bounceOut),
           child: GestureDetector(
             onTapDown: (_) => {
+              isTapped = true,
+              timer = Timer(Duration(milliseconds: 450), () {
+                isTapped = false;
+//                print('false: $isTapped');
+              }),
               timer = Timer(Duration(milliseconds: 1200), () {
                 Navigator.pushNamed(context, '/edit_story', arguments: {
                   'story': widget.story,
@@ -82,6 +88,9 @@ class _BookCardState extends State<BookCard> {
               timer.cancel();
             },
             onTapUp: (_) {
+              if (isTapped) {
+                print('Just tap: $isTapped');
+              }
               timer.cancel();
             },
             child: ClipRRect(
@@ -216,3 +225,27 @@ class _BookCardState extends State<BookCard> {
 //  }
 //}
 
+//            Stack(
+//              overflow: Overflow.visible,
+//              children: <Widget>[
+//                Parent(
+//                  child: Padding(
+//                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+//                    child: Row(
+//                      mainAxisAlignment: MainAxisAlignment.start,
+//                      crossAxisAlignment: CrossAxisAlignment.start,
+//                      children: <Widget>[
+//                        Text(
+//                          'Your\nStories',
+//                          style: Theme.of(context).textTheme.headline3,
+//                          textAlign: TextAlign.left,
+//                        ),
+//                      ],
+//                    ),
+//                  ),
+//                  style: ParentStyle()
+//                    ..height(size.height * 0.05)
+//                    ..minHeight(180)
+//                    ..background.color(memoBgColor)
+//                    ..borderRadius(bottomLeft: 15, bottomRight: 15),
+//                ),
