@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
+import 'package:memogatari/pages/add_story.dart';
 import 'package:memogatari/services/story.dart';
 import 'package:memogatari/utils/colors.dart';
 import 'package:memogatari/utils/widgets.dart';
@@ -39,6 +41,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
+    var pressed = false;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -46,38 +50,21 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Positioned(
               top: 20,
-              child: Flex(
-                children: <Widget>[
-                  Flexible(
-                    flex: 1,
-                    child: Container(),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: Text(
+                    'Memogatari',
+                    style: textTheme.headline4,
                   ),
-                  Expanded(
-                    flex: 7,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: Text(
-                          'Memogatari',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: IconButton(
-                      icon: Icon(Ionicons.ios_add),
-                    ),
-                  )
-                ],
+                ),
               ),
             ),
             Flex(
               direction: Axis.vertical,
               children: [
-                Expanded(
-                  flex: 1,
+                Flexible(
+                  flex: 2,
                   child: PageView.builder(
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, position) {
@@ -92,8 +79,8 @@ class _HomeState extends State<Home> {
                           angle: angle,
                           scale: scale,
                           story: listStory[position],
-                          titleStyle: Theme.of(context).textTheme.headline3,
-                          subtitleStyle: Theme.of(context).textTheme.subtitle1,
+                          titleStyle: textTheme.headline3,
+                          subtitleStyle: textTheme.subtitle1,
                           offset: pageOffset-position,
                           position: position,
                         );
@@ -105,17 +92,46 @@ class _HomeState extends State<Home> {
               ],
             ),
             Positioned(
-              bottom: 30,
-              child: SmoothPageIndicator(
-                controller: pageController,
-                count: listStory.length,
-                effect: ExpandingDotsEffect(
-                  dotWidth: 10,
-                  dotHeight: 10,
-                  radius: 6.5,
-                  dotColor: memoBrown,
-                  activeDotColor: memoRed,
+              top: 8,
+              right: 15,
+              child: Hero(
+                tag: 'add',
+                child: Parent(
+                  gesture: Gestures()
+                    ..onTap(() {
+                      Navigator.push(context, PageRouteBuilder(
+                          transitionDuration: Duration(milliseconds: 300),
+                          pageBuilder: (_, __, ___) => AddStory())
+                      );
+                    }),
+                  style: ParentStyle()
+                    ..height(40)
+                    ..width(40)
+                    ..borderRadius(all: 25)
+                    ..ripple(true)
+                    ..scale(pressed ? 0.9 : 1),
+                  child: Container(
+                    child: Icon(Icons.add, color: memoBrown,),
+                  ),
                 ),
+              ),
+            ),
+            Positioned(
+              bottom: 30,
+              child: Row(
+                children: <Widget>[
+                  SmoothPageIndicator(
+                    controller: pageController,
+                    count: listStory.length,
+                    effect: ExpandingDotsEffect(
+                      dotWidth: 10,
+                      dotHeight: 10,
+                      radius: 6.5,
+                      dotColor: memoBrown,
+                      activeDotColor: memoRed,
+                    ),
+                  ),
+                ],
               ),
             )
         ]),

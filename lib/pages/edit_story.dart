@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:clay_containers/clay_containers.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -29,7 +30,7 @@ class _EditStoryState extends State<EditStory> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,14 +49,14 @@ class _EditStoryState extends State<EditStory> {
                   ..alignment.center()
                   ..height(230)
                   ..width(170)
-                  ..elevation(30)
                   ..borderRadius(all: 5)
+                  ..elevation(30)
                   ..ripple(true, splashColor: memoRed)
                   ..background.image(url: story.image, fit: BoxFit.cover),
                 child: Container(),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             Text(
               'TITLE',
               style: textTheme.overline,
@@ -63,13 +64,10 @@ class _EditStoryState extends State<EditStory> {
             SizedBox(height: 5),
             Hero(
               tag: 'title${data['position']}',
-              child: TextFormField(
-                initialValue: story.title,
+              child: Text(
+                story.title,
                 style: textTheme.headline5,
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  border: InputBorder.none
-                ),
               ),
             ),
             SizedBox(height: 10),

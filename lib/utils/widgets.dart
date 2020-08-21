@@ -59,17 +59,17 @@ class _BookCardState extends State<BookCard> {
           style: ParentStyle()
             ..margin(
                 left: 15,
-                top: 150 - widget.scale * 40,
+                top: size.height/5 - widget.scale * 30,
                 right: 15,
-                bottom: 160 - widget.scale * 40
+                bottom: size.height/4.5 - widget.scale * 30
             )
             ..ripple(true, splashColor: memoRed)
-            ..elevation(pressed ? 0 : 30)
+            ..elevation(pressed ? 0 : 50)
             ..scale(pressed ? 0.95 : 1)
             ..borderRadius(all: borderRadius)
             ..background.color(memoOrange)
             ..background.image(url: widget.story.image, fit: BoxFit.cover)
-            ..animate(450, Curves.bounceOut),
+            ..animate(350, Curves.bounceOut),
           child: GestureDetector(
             onTapDown: (_) => {
               isTapped = true,
