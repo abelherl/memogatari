@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>597324575960-3kq81i5c8epid3k7ns9vi7nudb8usuol.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.597324575960-3kq81i5c8epid3k7ns9vi7nudb8usuol</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCOW14pWLbY60ZO5ivRfmUkzmBitaDoryM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>597324575960</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.abelherl.memogatari</string>
+	<key>PROJECT_ID</key>
+	<string>memogatari-430918</string>
+	<key>STORAGE_BUCKET</key>
+	<string>memogatari-430918.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:597324575960:ios:074def0013793097da53ad</string>
+	<key>DATABASE_URL</key>
+	<string>https://memogatari-430918-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

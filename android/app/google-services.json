@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "597324575960",
+    "firebase_url": "https://memogatari-430918-default-rtdb.firebaseio.com",
+    "project_id": "memogatari-430918",
+    "storage_bucket": "memogatari-430918.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597324575960:android:7a342d489ed54d95da53ad",
+        "android_client_info": {
+          "package_name": "com.abelherl.memogatari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597324575960-jqk73g08vl6ho9e1soh3eu0gn995u67n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOV3kZ96pfvWl2WC6p3NtNK_pJnFhSGTE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597324575960-jqk73g08vl6ho9e1soh3eu0gn995u67n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
