@@ -1,4 +1,4 @@
-# memogatari
+# Memogatari
 
 A new Flutter application.
 
