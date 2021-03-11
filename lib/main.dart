@@ -1,46 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:memogatari/pages/add_story.dart';
-import 'package:memogatari/pages/edit_story.dart';
-import 'package:memogatari/pages/home.dart';
-import 'package:memogatari/pages/image_viewer.dart';
-import 'package:memogatari/pages/splash.dart';
-import 'package:memogatari/services/story.dart';
-import 'package:memogatari/utils/theme.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
-import 'utils/colors.dart';
+import 'package:get_it/get_it.dart';
+import 'package:logging/logging.dart';
+import 'package:memogatari/presentation/core/app.dart';
+import 'package:memogatari/presentation/core/main_app_widget.dart';
+import 'package:memogatari/shared/constant_definition.dart';
+import 'package:sailor/sailor.dart';
 
-void main() async {
+Future<void> main() async {
+  // Activate logger in root
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    print(
+      '${record.level.name}: ${record.loggerName}: ${record.time}: ${record.message}',
+    );
+  });
+
+  GetIt.instance.registerSingleton(
+    App(
+      flavor: Flavor.development,
+      router: Sailor(),
+    ),
+  );
+
+  // ensure initialized
   WidgetsFlutterBinding.ensureInitialized();
-  final appDocumentDirectory = await path_provider.getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
-  Hive.registerAdapter(StoryAdapter());
-  runApp(MaterialApp(
-    initialRoute: '/',
-    theme: mainTheme(),
-    routes: {
-      '/': (context) => Splash(),
-      '/home': (context) {
-        return FutureBuilder(
-            future: Hive.openBox('stories'),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return Text(snapshot.error);
-                }
-                else {
-                  return Home();
-                }
-              }
-              else {
-                return Splash();
-              }
-            }
-        );
-      },
-      '/edit_story': (context) => EditStory(),
-      '/add_story': (context) => AddStory(),
-      '/image_viewer': (context) => ImageViewer()
-    },
-  ));
+
+  // wait initialized
+  await App.main.init();
+
+  runApp(MainApp());
 }
