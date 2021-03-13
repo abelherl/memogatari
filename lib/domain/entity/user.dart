@@ -3,13 +3,13 @@ import 'package:equatable/equatable.dart';
 class Story extends Equatable {
   final String id;
   final String title;
-  final String description;
+  final String synopsis;
   final String image;
 
   Story({
     this.id,
     this.title,
-    this.description,
+    this.synopsis,
     this.image,
   });
 

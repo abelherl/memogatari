@@ -28,31 +28,31 @@ class _LoginPageState extends State<LoginPage> {
     Story(
         id: '1',
         title: 'A Deluxe Burger',
-        description: "'Cause I'm still craving for them smh",
+        synopsis: "'Cause I'm still craving for them smh",
         image:
-            'https://images.pexels.com/photos/1639565/pexels-photo-1639565.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
+        'https://images.pexels.com/photos/1639565/pexels-photo-1639565.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
     Story(
         id: '2',
         title: 'Concrete Jungle K Dream Tomato',
-        description: "There's nothing you can't do when you're in New York",
+        synopsis: "There's nothing you can't do when you're in New York. There's nothing you can't do when you're in New York",
         image:
-            'https://images.pexels.com/photos/2422588/pexels-photo-2422588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
+        'https://images.pexels.com/photos/2422588/pexels-photo-2422588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
     Story(
         id: '3',
         title: 'Aina',
-        description: 'Uh-oh wrong dimension lmao',
+        synopsis: 'Uh-oh wrong dimension lmao',
         image:
-            'https://images.pexels.com/photos/2340166/pexels-photo-2340166.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'),
+        'https://images.pexels.com/photos/2340166/pexels-photo-2340166.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'),
     Story(
         id: '4',
         title: 'Astray Medico',
-        description: 'Poor Norina aww',
+        synopsis: 'Poor Norina aww',
         image:
-            'https://i.pinimg.com/originals/b6/02/a5/b602a56b18086d83ad36ac32e8a0e3ed.jpg'),
+        'https://i.pinimg.com/originals/b6/02/a5/b602a56b18086d83ad36ac32e8a0e3ed.jpg'),
     Story(
         id: '5',
         title: 'My Best Friend Acts A Little Bit Different',
-        description: 'Long ass title lol',
+        synopsis: 'Long ass title lol',
         image: 'https://c.stocksy.com/a/q9u600/z9/1645842.jpg'),
   ];
   PageController pageController = PageController();
@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     Future.delayed(Duration(milliseconds: 2000), () {
-      _top = 30;
+      _top = 25;
       _animateSplash = true;
 
       setState(() {});
@@ -96,129 +96,134 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Flex(
-              direction: Axis.vertical,
-              children: [
-                Flexible(
-                  flex: 2,
-                  child: PageView.builder(
-                    physics: BouncingScrollPhysics(),
-                    onPageChanged: (page) {
-                      _currentPage = page;
-                    },
-                    itemBuilder: (context, position) {
-                      double scale = max(
-                          fraction, 1 - (pageOffset - position).abs() + fraction);
-                      var angle = (pageOffset - position).abs();
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Flex(
+            direction: Axis.vertical,
+            children: [
+              Flexible(
+                flex: 2,
+                child: PageView.builder(
+                  physics: BouncingScrollPhysics(),
+                  onPageChanged: (page) {
+                    _currentPage = page;
+                  },
+                  itemBuilder: (context, position) {
+                    double scale = max(
+                        fraction, 1 - (pageOffset - position).abs() + fraction);
+                    var angle = (pageOffset - position).abs();
 
-                      if (angle > 0.5) {
-                        angle = 1 - angle;
-                      }
+                    if (angle > 0.5) {
+                      angle = 1 - angle;
+                    }
 
-                      return BookCard(
-                        angle: angle,
-                        scale: scale,
-                        story: listStory[position],
-                        titleStyle: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            .copyWith(color: Colors.white),
-                        subtitleStyle:
-                            Theme.of(context).textTheme.subtitle2.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                        offset: pageOffset - position,
-                        position: position,
-                      );
-                    },
-                    controller: pageController,
-                    itemCount: listStory.length,
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: 80,
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: FlatButton(
-                        onPressed: () => _animatePage(false),
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        child: Container(),
+                    return BookCard(
+                      angle: angle,
+                      scale: scale,
+                      story: listStory[position],
+                      titleStyle: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .copyWith(color: Colors.white),
+                      subtitleStyle:
+                      Theme.of(context).textTheme.subtitle2.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
                       ),
-                    ),
-                    SmoothPageIndicator(
-                      controller: pageController,
-                      count: listStory.length,
-                      effect: ExpandingDotsEffect(
-                        dotWidth: 10,
-                        dotHeight: 10,
-                        radius: 6.5,
-                        dotColor: memoBrown,
-                        activeDotColor: memoRed,
-                      ),
-                    ),
-                    Expanded(
-                      child: FlatButton(
-                        onPressed: () => _animatePage(true),
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        child: Container(),
-                      ),
-                    ),
-                  ],
+                      offset: pageOffset - position,
+                      position: position,
+                    );
+                  },
+                  controller: pageController,
+                  itemCount: listStory.length,
                 ),
               ),
-            ),
-            Parent(
-              style: ParentStyle()
-                ..height(_height)
-                ..linearGradient(
-                  colors: [
-                    _animateSplash
-                        ? Theme.of(context).scaffoldBackgroundColor.withAlpha(0)
-                        : memoRed,
-                    _animateSplash
-                        ? Theme.of(context).scaffoldBackgroundColor.withAlpha(0)
-                        : memoOrange,
-                  ],
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                )
-                ..animate(
-                  1500,
-                  Curves.easeOutQuart,
-                ),
-            ),
-            AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOutQuart,
-                top: _top,
-                child: AnimatedOpacity(
-                  opacity: _opacity,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.easeInOutQuart,
-                  child: Txt(
-                    'Memogatari',
-                    style: TxtStyle()
-                      ..fontSize(_animateSplash ? 20 : 24)
-                      ..fontWeight(FontWeight.w300)
-                      ..textColor(_animateSplash ? memoRed : Theme.of(context).scaffoldBackgroundColor)
-                      ..animate(1000, Curves.easeInOutQuart),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: 80,
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: () => _animatePage(false),
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Container(),
+                    ),
                   ),
-                )),
-          ],
-        ),
+                  SmoothPageIndicator(
+                    controller: pageController,
+                    count: listStory.length,
+                    effect: ExpandingDotsEffect(
+                      dotWidth: 10,
+                      dotHeight: 10,
+                      radius: 6.5,
+                      dotColor: memoBrown,
+                      activeDotColor: memoRed,
+                    ),
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: () => _animatePage(true),
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Container(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Parent(
+            style: ParentStyle()
+              ..height(_height)
+              ..linearGradient(
+                colors: [
+                  _animateSplash
+                      ? Theme.of(context).scaffoldBackgroundColor.withAlpha(0)
+                      : memoRed,
+                  _animateSplash
+                      ? Theme.of(context).scaffoldBackgroundColor.withAlpha(0)
+                      : memoOrange,
+                ],
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+              )
+              ..animate(
+                1500,
+                Curves.easeOutQuart,
+              ),
+          ),
+          SafeArea(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                AnimatedPositioned(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOutQuart,
+                    top: _top,
+                    child: AnimatedOpacity(
+                      opacity: _opacity,
+                      duration: Duration(milliseconds: 100),
+                      curve: Curves.easeInOutQuart,
+                      child: Txt(
+                        'Memogatari',
+                        style: TxtStyle()
+                          ..fontSize(_animateSplash ? 20 : 24)
+                          ..fontWeight(FontWeight.w300)
+                          ..textColor(_animateSplash ? memoRed : Theme.of(context).scaffoldBackgroundColor)
+                          ..animate(1000, Curves.easeInOutQuart),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -251,13 +256,13 @@ class _LoginPageState extends State<LoginPage> {
 class BookCard extends StatefulWidget {
   const BookCard(
       {Key key,
-      @required this.angle,
-      @required this.scale,
-      @required this.story,
-      @required this.titleStyle,
-      @required this.subtitleStyle,
-      @required this.offset,
-      @required this.position})
+        @required this.angle,
+        @required this.scale,
+        @required this.story,
+        @required this.titleStyle,
+        @required this.subtitleStyle,
+        @required this.offset,
+        @required this.position})
       : super(key: key);
 
   final double angle;
@@ -288,7 +293,7 @@ class _BookCardState extends State<BookCard> {
     return Transform(
       transform: Matrix4.identity()
         ..setEntry(3, 2, 0.001)
-        // ..rotateX(-widget.angle)
+      // ..rotateX(-widget.angle)
         ..rotateY(widget.angle*1.5),
       alignment: Alignment.center,
       child: Stack(
@@ -297,9 +302,9 @@ class _BookCardState extends State<BookCard> {
             style: ParentStyle()
               ..margin(
                 left: 10,
-                top: 120,
+                top: 140,
                 right: 10,
-                bottom: 130,
+                bottom: 110,
               )
               ..elevation(pressed ? 0 : 50)
               ..scale(pressed ? 0.95 : 1)
@@ -320,15 +325,15 @@ class _BookCardState extends State<BookCard> {
                 //   });
                 // }
                 // else {
-                  setState(() => pressed = isTapped);
+                setState(() => pressed = isTapped);
                 // }
               }),
             style: ParentStyle()
               ..margin(
                 left: 10,
-                top: 120,
+                top: 140,
                 right: 10,
-                bottom: 130,
+                bottom: 110,
               )
               ..ripple(true, splashColor: memoRed)
               ..scale(pressed ? 0.95 : 1)
@@ -361,62 +366,86 @@ class _BookCardState extends State<BookCard> {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(borderRadius),
-                child: Stack(children: <Widget>[
-                  Parent(
-                    style: ParentStyle()
-                      ..height(double.infinity)
-                      ..height(double.infinity)
-                      ..borderRadius(all: 13)
-                      ..linearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [
-                            pressed
-                                ? memoRed.withAlpha(150)
-                                : memoRed.withAlpha(0),
-                            pressed
-                                ? memoOrange.withAlpha(150)
-                                : memoOrange.withAlpha(0)
-                          ]),
-                       // ..background.blur(pressed ? 3 : 0),
-                   // ..background.blur(widget.offset < -0.5 || widget.offset > 0.5 ? (widget.offset + 1) * 10 : widget.offset * 10)
-                    child: Container(),
-                  ),
-                  Positioned(
-                    bottom: 15,
-                    left: 15,
-                    child: Parent(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Parent(
                       style: ParentStyle()
-                        ..width(size.width / 1.6)
-                        ..padding(all: 15)
-                        ..background.blur(15)
-                        // ..background.color(Colors.white.withAlpha(80))
-                        ..borderRadius(all: borderRadius),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Hero(
-                            tag: 'title${widget.position}',
-                            child: Text(
-                              widget.story.title,
-                              style: widget.titleStyle,
+                        ..height(double.infinity)
+                        ..height(double.infinity)
+                        ..borderRadius(all: 13)
+                        ..linearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              pressed
+                                  ? memoRed.withAlpha(150)
+                                  : memoRed.withAlpha(0),
+                              pressed
+                                  ? memoOrange.withAlpha(150)
+                                  : memoOrange.withAlpha(0)
+                            ]),
+                      // ..background.blur(pressed ? 3 : 0),
+                      // ..background.blur(widget.offset < -0.5 || widget.offset > 0.5 ? (widget.offset + 1) * 10 : widget.offset * 10)
+                      child: Container(),
+                    ),
+                    AnimatedOpacity(
+                      opacity: pressed ? 1 : 0,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOutQuart,
+                      child: Text(
+                        "Keep holding\nto edit info",
+                        textAlign: TextAlign.center,
+                        style: widget.titleStyle.copyWith(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      // Icon(
+                      //   Icons.edit_rounded,
+                      //   color: Colors.white.withAlpha(150),
+                      //   size: pressed ? 60 : 0,
+                      // ),
+                    ),
+                    AnimatedPositioned(
+                      duration: Duration(milliseconds: 350),
+                      curve: Curves.easeInOutQuart,
+                      bottom: 10,
+                      child: Parent(
+                        style: ParentStyle()
+                          ..width(size.width / 1.6)
+                          ..padding(all: 15)
+                          ..background.color(pressed ? Colors.transparent : Colors.black12)
+                          ..background.blur(pressed ? 0 : 15)
+                          ..borderRadius(all: borderRadius)
+                          ..animate(350, Curves.easeInOutQuart),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Hero(
+                              tag: 'title${widget.position}',
+                              child: Text(
+                                widget.story.title,
+                                style: widget.titleStyle,
+                                maxLines: 2,
+                                overflow: TextOverflow.fade,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              widget.story.synopsis,
+                              style: widget.subtitleStyle,
                               maxLines: 3,
                               overflow: TextOverflow.fade,
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            widget.story.description,
-                            style: widget.subtitleStyle,
-                            maxLines: 2,
-                            overflow: TextOverflow.fade,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             ),
           ),
