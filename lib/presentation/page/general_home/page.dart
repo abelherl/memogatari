@@ -99,6 +99,28 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         alignment: Alignment.center,
         children: [
+          SafeArea(
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 20,
+                  right: 15,
+                  child: Parent(
+                    gesture: Gestures(),
+                    style: ParentStyle()
+                      ..width(35)
+                      ..height(35)
+                      ..borderRadius(all: 25)
+                      ..background.color(Colors.grey.withAlpha(100)),
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Flex(
             direction: Axis.vertical,
             children: [
@@ -144,8 +166,10 @@ class _HomePageState extends State<HomePage> {
           Positioned(
             bottom: 0,
             child: Container(
+              height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
                     child: FlatButton(
@@ -164,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                         dotWidth: 10,
                         dotHeight: 10,
                         radius: 6.5,
-                        dotColor: memoBrown,
+                        dotColor: memoBrown.withAlpha(150),
                         activeDotColor: memoRed,
                       ),
                     ),
@@ -395,20 +419,21 @@ class _BookCardState extends State<BookCard> {
                       opacity: pressed ? 1 : 0,
                       duration: Duration(milliseconds: 500),
                       curve: Curves.easeInOutQuart,
-                      child: Text(
-                        "Keep holding\nto edit info",
-                        textAlign: TextAlign.center,
-                        style: widget.titleStyle.copyWith(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                      // Icon(
-                      //   Icons.edit_rounded,
-                      //   color: Colors.white.withAlpha(150),
-                      //   size: pressed ? 60 : 0,
+                      child:
+                      // Text(
+                      //   "Keep holding\nto edit info",
+                      //   textAlign: TextAlign.center,
+                      //   style: widget.titleStyle.copyWith(
+                      //     color: Colors.white,
+                      //     fontSize: 24,
+                      //     fontWeight: FontWeight.w300,
+                      //   ),
                       // ),
+                      Icon(
+                        Icons.edit_rounded,
+                        color: Colors.white.withAlpha(150),
+                        size: pressed ? 60 : 0,
+                      ),
                     ),
                     AnimatedPositioned(
                       duration: Duration(milliseconds: 350),
