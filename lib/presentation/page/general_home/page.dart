@@ -12,12 +12,12 @@ import 'package:memogatari/shared/constant_styling.dart';
 import 'package:sailor/sailor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class LoginPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _HomePageState extends State<HomePage> {
   double _top;
   double _height;
   double _opacity = 0;
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
       ..addListener(() {
         setState(() {
           pageOffset = pageController.page;
-          print(pageOffset);
+          // print(pageOffset);
         });
       });
 
@@ -144,7 +144,6 @@ class _LoginPageState extends State<LoginPage> {
           Positioned(
             bottom: 0,
             child: Container(
-              height: 80,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 children: [
@@ -156,15 +155,18 @@ class _LoginPageState extends State<LoginPage> {
                       child: Container(),
                     ),
                   ),
-                  SmoothPageIndicator(
-                    controller: pageController,
-                    count: listStory.length,
-                    effect: ExpandingDotsEffect(
-                      dotWidth: 10,
-                      dotHeight: 10,
-                      radius: 6.5,
-                      dotColor: memoBrown,
-                      activeDotColor: memoRed,
+                  Container(
+                    height: 80,
+                    child: SmoothPageIndicator(
+                      controller: pageController,
+                      count: listStory.length,
+                      effect: ExpandingDotsEffect(
+                        dotWidth: 10,
+                        dotHeight: 10,
+                        radius: 6.5,
+                        dotColor: memoBrown,
+                        activeDotColor: memoRed,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -288,7 +290,7 @@ class _BookCardState extends State<BookCard> {
   Widget build(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var size = MediaQuery.of(context).size;
-    print(widget.offset);
+    // print(widget.offset);
 
     return Transform(
       transform: Matrix4.identity()
@@ -417,7 +419,7 @@ class _BookCardState extends State<BookCard> {
                           ..width(size.width / 1.6)
                           ..padding(all: 15)
                           ..background.color(pressed ? Colors.transparent : Colors.black12)
-                          ..background.blur(pressed ? 0 : 15)
+                          ..background.blur(pressed ? 0 : 7)
                           ..borderRadius(all: borderRadius)
                           ..animate(350, Curves.easeInOutQuart),
                         child: Column(

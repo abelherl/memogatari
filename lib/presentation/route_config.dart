@@ -4,7 +4,7 @@ import 'package:sailor/sailor.dart';
 /// Route name directory
 class RouteName {
   // General routes
-  static const String generalSplash = '/';
+  static const String generalHome = '/';
   static const String generalLogin = '/login';
 }
 

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:memogatari/presentation/main_theme.dart';
-import 'package:memogatari/presentation/page/general_login/page.dart';
-import 'package:memogatari/presentation/page/general_splash/page.dart';
+import 'package:memogatari/presentation/page/general_home/page.dart';
 
 import '../main_theme.dart';
 import 'app.dart';
@@ -25,7 +24,7 @@ class _MainAppState extends State<MainApp> {
       },
       title: 'Memogatari',
       theme: mainTheme(),
-      home: LoginPage(),
+      home: HomePage(),
       navigatorKey: App.main.router.navigatorKey,
       onGenerateRoute: App.main.router.generator(),
       // supportedLocales: [
