@@ -171,7 +171,8 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Expanded(
+                  Container(
+                    width: 20,
                     child: FlatButton(
                       onPressed: () => _animatePage(false),
                       splashColor: Colors.transparent,
@@ -179,21 +180,24 @@ class _HomePageState extends State<HomePage> {
                       child: Container(),
                     ),
                   ),
-                  Container(
-                    height: 80,
-                    child: SmoothPageIndicator(
-                      controller: pageController,
-                      count: listStory.length,
-                      effect: ExpandingDotsEffect(
-                        dotWidth: 10,
-                        dotHeight: 10,
-                        radius: 6.5,
-                        dotColor: memoBrown.withAlpha(150),
-                        activeDotColor: memoRed,
+                  Expanded(
+                    child: Container(
+                      height: 80,
+                      child: SmoothPageIndicator(
+                        controller: pageController,
+                        count: listStory.length,
+                        effect: ExpandingDotsEffect(
+                          dotWidth: 10,
+                          dotHeight: 10,
+                          radius: 6.5,
+                          dotColor: memoBrown.withAlpha(150),
+                          activeDotColor: memoRed,
+                        ),
                       ),
                     ),
                   ),
-                  Expanded(
+                  Container(
+                    width: 20,
                     child: FlatButton(
                       onPressed: () => _animatePage(true),
                       splashColor: Colors.transparent,
