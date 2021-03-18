@@ -96,31 +96,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Color.fromARGB(255, 30, 30, 30),
       body: Stack(
         alignment: Alignment.center,
         children: [
-          SafeArea(
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 20,
-                  right: 15,
-                  child: Parent(
-                    gesture: Gestures(),
-                    style: ParentStyle()
-                      ..width(35)
-                      ..height(35)
-                      ..borderRadius(all: 25)
-                      ..background.color(Colors.grey.withAlpha(100)),
-                    child: Icon(
-                      Icons.person,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
           Flex(
             direction: Axis.vertical,
             children: [
@@ -166,13 +145,13 @@ class _HomePageState extends State<HomePage> {
           Positioned(
             bottom: 0,
             child: Container(
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height - 100,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    width: 20,
+                    width: 50,
                     child: FlatButton(
                       onPressed: () => _animatePage(false),
                       splashColor: Colors.transparent,
@@ -183,21 +162,24 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: Container(
                       height: 80,
-                      child: SmoothPageIndicator(
-                        controller: pageController,
-                        count: listStory.length,
-                        effect: ExpandingDotsEffect(
-                          dotWidth: 10,
-                          dotHeight: 10,
-                          radius: 6.5,
-                          dotColor: memoBrown.withAlpha(150),
-                          activeDotColor: memoRed,
+                      child: Center(
+                        child: SmoothPageIndicator(
+                          controller: pageController,
+                          count: listStory.length,
+                          onDotClicked: (index) => _animatePage(null, index),
+                          effect: ExpandingDotsEffect(
+                            dotWidth: 10,
+                            dotHeight: 10,
+                            radius: 6.5,
+                            dotColor: memoBrown.withAlpha(150),
+                            activeDotColor: memoRed,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   Container(
-                    width: 20,
+                    width: 50,
                     child: FlatButton(
                       onPressed: () => _animatePage(true),
                       splashColor: Colors.transparent,
@@ -207,6 +189,38 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+            ),
+          ),
+          SafeArea(
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 20,
+                  right: 20,
+                  child: Hero(
+                    tag: "profile",
+                    child: Parent(
+                      gesture: Gestures()
+                        ..onTap(() {
+                          App.main.router.navigate(
+                            RouteName.generalProfile,
+                            transitionCurve: Curves.easeOutQuart,
+                            transitions: [SailorTransition.fade_in],
+                          );
+                        }),
+                      style: ParentStyle()
+                        ..width(35)
+                        ..height(35)
+                        ..borderRadius(all: 40)
+                        ..background.color(Colors.grey.withAlpha(100)),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Parent(
@@ -253,16 +267,30 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          Positioned(
+            top: 0,
+            child: FlatButton(
+              onPressed: null,
+              child: Container(
+                width: !_allowAnimate ? MediaQuery.of(context).size.width : 0,
+                height: !_allowAnimate ? MediaQuery.of(context).size.height : 0,
+                color: Colors.red,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  void _animatePage(bool next) {
-    if (_allowAnimate) {
-      bool loop = false;
-      int page = _currentPage;
+  void _animatePage([bool next, int index]) {
+    bool loop = false;
+    int page = _currentPage;
 
+    if (index != null) {
+      page = index;
+    }
+    else if (_allowAnimate) {
       _allowAnimate = false;
 
       if (next ? page == listStory.length - 1 : page == 0) {
@@ -272,14 +300,14 @@ class _HomePageState extends State<HomePage> {
       else {
         page = next ? page + 1: page - 1;
       }
-
-      print('pressed $loop');
-      pageController.animateToPage(page, duration: Duration(milliseconds: 500), curve: Curves.easeInOutQuart);
-
-      Future.delayed(Duration(milliseconds: 500), () {
-        _allowAnimate = true;
-      });
     }
+
+    print('pressed $loop');
+    pageController.animateToPage(page, duration: Duration(milliseconds: 500), curve: Curves.easeInOutQuart);
+
+    Future.delayed(Duration(milliseconds: 500), () {
+      _allowAnimate = true;
+    });
   }
 }
 
@@ -485,3 +513,4 @@ class _BookCardState extends State<BookCard> {
     );
   }
 }
+

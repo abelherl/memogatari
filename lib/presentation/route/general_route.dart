@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:memogatari/presentation/page/general_home/page.dart';
+import 'package:memogatari/presentation/page/general_profile/page.dart';
 import 'package:sailor/sailor.dart';
 import '../route_config.dart';
 
@@ -9,6 +10,12 @@ class GeneralRouteConfig {
       name: RouteName.generalHome,
       builder: (context, args, params) {
         return HomePage();
+      },
+    ),
+    SailorRoute(
+      name: RouteName.generalProfile,
+      builder: (context, args, params) {
+        return ProfilePage();
       },
     ),
     // SailorRoute(

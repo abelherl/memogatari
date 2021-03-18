@@ -6,6 +6,7 @@ class RouteName {
   // General routes
   static const String generalHome = '/';
   static const String generalLogin = '/login';
+  static const String generalProfile = '/profile';
 }
 
 class RouteConfig {
