@@ -14,7 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color.fromARGB(255, 30, 30, 30),
+      backgroundColor: Color.fromARGB(255, 240, 240, 240),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -23,26 +23,37 @@ class _ProfilePageState extends State<ProfilePage> {
             SafeArea(child: Container()),
             Container(
               padding: EdgeInsets.symmetric(vertical: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: Stack(
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () => App.main.router.pop(),
-                    color: memoRed,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () => App.main.router.pop(),
+                        color: memoRed,
+                      ),
+                      Spacer(),
+                      // IconButton(
+                      //   icon: Icon(Icons.logout),
+                      //   onPressed: () {},
+                      //   splashColor: Colors.transparent,
+                      //   highlightColor: Colors.transparent,
+                      //   color: memoRed,
+                      // ),
+                    ],
                   ),
-                  Expanded(child: Container()),
-                  Text(
-                    'Profile',
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
-                      color: Colors.black.withAlpha(180),
+                  Positioned(
+                    top: 15,
+                    left: 0,
+                    right: 0,
+                    child: Text(
+                      'Profile',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        color: Colors.black.withAlpha(180),
+                      ),
                     ),
-                  ),
-                  Expanded(child: Container()),
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () => App.main.router.pop(),
-                    color: memoRed,
                   ),
                 ],
               ),
@@ -85,41 +96,62 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             SizedBox(height: 30),
-            Container(
-              padding: EdgeInsets.only(left: 20, bottom: 10,),
-              width: double.infinity,
-              child: Text(
-                "PREFERENCES",
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
-                  fontSize: 12,
-                  color: Colors.black54,
-                  letterSpacing: 1.5,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
+            SettingsSeparator(title: "account"),
+            SettingsItem(heading: 'Account Settings', subtitle: 'Edit your profile', routeName: RouteName.generalLogin,),
+            SettingsItem(heading: 'Premium Version', subtitle: 'Buy or try Premium version', routeName: RouteName.generalLogin,),
+            SettingsItem(heading: 'Referral Dashboard', subtitle: 'Invite friends to use Memoga and get rewards', routeName: RouteName.generalLogin,),
+            SizedBox(height: 20),
+            SettingsSeparator(title: "preferences"),
             SettingsItem(heading: 'Theme', subtitle: "Customize Memoga's appearance", routeName: RouteName.generalLogin,),
             SettingsItem(heading: 'Lite Mode', subtitle: 'Optimize app performance', routeName: RouteName.generalLogin,),
-            SettingsItem(heading: 'Premium Version', subtitle: 'Buy or try Premium version', routeName: RouteName.generalLogin,),
-            SizedBox(height: 25),
-            Container(
-              padding: EdgeInsets.only(left: 20, bottom: 10,),
-              width: double.infinity,
-              child: Text(
-                "OTHER",
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
-                  fontSize: 12,
-                  color: Colors.black54,
-                  letterSpacing: 1.5,
+            SizedBox(height: 20),
+            SettingsSeparator(title: "other"),
+            SettingsItem(heading: 'User Surveys', subtitle: 'Surveys about potential updates for Memoga with rewards from developer', routeName: RouteName.generalLogin,),
+            FlatButton(
+              onPressed: () {},
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  "Logout",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.button.copyWith(
+                      color: Colors.redAccent
+                  ),
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
             ),
-            SettingsItem(heading: 'User Surveys', subtitle: 'Surveys with rewards from developer', routeName: RouteName.generalLogin,),
+            SizedBox(height: 20),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SettingsSeparator extends StatelessWidget {
+  const SettingsSeparator({
+    Key key,
+    @required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 20, bottom: 10,),
+      width: double.infinity,
+      child: Text(
+        title.toUpperCase(),
+        style: Theme.of(context).textTheme.bodyText2.copyWith(
+          fontSize: 12,
+          color: Colors.black54,
+          letterSpacing: 1.5,
+        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -153,18 +185,18 @@ class _SettingsItemState extends State<SettingsItem> {
         }),
       style: ParentStyle()
         ..width(double.infinity)
-        ..padding(all: 15)
+        ..padding(all: 12)
         ..margin(horizontal: 15, bottom: 10,)
-        ..background.color(Color.fromARGB(255, 230, 230, 230))
+        ..background.color(Colors.white54)
         ..ripple(true, splashColor: memoRed.withAlpha(180), highlightColor: Colors.transparent,)
         ..borderRadius(all: 15)
         ..scale(pressed ? 0.95 : 1)
         ..animate(350, Curves.easeInOutQuart),
         // ..boxShadow(
         //   color: Colors.black12,
-        //   offset: Offset(0, -1),
-        //   blur: 10,
-        //   spread: 1,
+        //   offset: Offset(0, 0),
+        //   blur: pressed ? 0 : 15,
+        //   spread: -3,
         // ),
       child: Row(
         children: [
@@ -174,27 +206,30 @@ class _SettingsItemState extends State<SettingsItem> {
               children: [
                 Text(
                   widget.heading,
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  style: Theme.of(context).textTheme.subtitle2.copyWith(
                     fontWeight: FontWeight.w500,
                     color: Colors.black54.withAlpha(180),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
+                SizedBox(height: 2),
                 Text(
                   widget.subtitle,
-                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  style: Theme.of(context).textTheme.caption.copyWith(
                     color: Colors.black54,
                   ),
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
+          SizedBox(width: 12),
           Icon(
             Icons.arrow_forward_ios,
-            color: Colors.black54.withAlpha(180),
+            size: 20,
+            color: Colors.black54,
           ),
         ],
       ),
